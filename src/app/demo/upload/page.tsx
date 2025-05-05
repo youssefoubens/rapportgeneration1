@@ -1,7 +1,7 @@
 // app/page.tsx
 import Link from 'next/link'
 import { getCurrentUser } from '@/lib/auth'
-import '../../src/app/styles/home.css'
+import '../../styles/home.css'
 
 export default async function Home() {
   const user = await getCurrentUser()
@@ -24,7 +24,15 @@ export default async function Home() {
           </Link>
         ) : (
           <div className="auth-options">
-         
+            <Link href="/auth/signin" className="primary-button">
+              Sign In
+            </Link>
+            <Link href="/auth/signup" className="secondary-button">
+              Sign Up
+            </Link>
+            <div className="demo-divider">
+              <span>or</span>
+            </div>
             <Link href="/demo/upload" className="demo-button">
               Try Demo
             </Link>

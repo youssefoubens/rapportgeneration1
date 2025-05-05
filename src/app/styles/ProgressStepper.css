@@ -1,0 +1,69 @@
+/* ProgressStepper.css */
+.progress-stepper {
+    margin: 2rem 0;
+}
+
+.stepper-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.stepper-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    flex: 1;
+}
+
+.step-number {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background-color: #e5e7eb;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    z-index: 1;
+}
+
+.step-label {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    text-align: center;
+}
+
+.step-connector {
+    position: absolute;
+    top: 1rem;
+    left: 50%;
+    right: -50%;
+    height: 2px;
+    background-color: #e5e7eb;
+    z-index: 0;
+}
+
+.stepper-step.active .step-number {
+    background-color: #2563eb;
+    color: white;
+}
+
+.stepper-step.active .step-label {
+    color: #2563eb;
+    font-weight: 500;
+}
+
+.stepper-step.completed .step-number {
+    background-color: #10b981;
+    color: white;
+}
+
+@media (max-width: 640px) {
+    .step-label {
+        font-size: 0.75rem;
+    }
+}
