@@ -1,12 +1,12 @@
 // app/upload/page.tsx
 'use client'
 import { useState, useCallback } from 'react'
+import { useRouter } from 'next/navigation'
 import ImageUploader from '@/components/ImageUploader'
 import TOCInput from '@/components/TOCInput'
 import TemplateSelector from '@/components/TemplateSelector'
 import ProgressStepper from '../../components/ProgressStepper'
 import ReportPreviewModal from '../../components/ReportPreview'
-import { useRouter } from 'next/navigation'
 import '../styles/upload.css'
 
 export default function UploadPage() {
@@ -35,11 +35,6 @@ export default function UploadPage() {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000))
       
-      // In a real app, you would:
-      // 1. Upload images to storage
-      // 2. Send data to your report generation API
-      // 3. Handle the response
-      
       const mockResponse = {
         title: reportTitle || 'Untitled Report',
         template: selectedTemplate,
@@ -50,6 +45,15 @@ export default function UploadPage() {
       
       setPreviewData(mockResponse)
       setActiveStep(2)
+
+      // Store the demo report in localStorage
+      localStorage.setItem('demoReport', JSON.stringify({
+        title: reportTitle || 'Untitled Report',
+        pdfUrl: '/sample-report.pdf', // In a real app, this would be the generated PDF URL
+        pageCount: Math.ceil(toc.length * 1.5), // Example calculation
+        template: selectedTemplate,
+        createdAt: new Date().toISOString()
+      }))
     } catch (error) {
       console.error('Generation failed:', error)
     } finally {
@@ -71,7 +75,7 @@ export default function UploadPage() {
 
   const handleClosePreview = () => {
     setPreviewData(null)
-    router.push('/dashboard')
+    router.push('/demo/preview') // Redirect to preview page after generation
   }
 
   return (
@@ -92,13 +96,7 @@ export default function UploadPage() {
               images={images} 
               setImages={setImages} 
             />
-            <button 
-              onClick={handleNextStep}
-              className="primary-button"
-              disabled={images.length === 0}
-            >
-              Next
-            </button>
+           
           </section>
         )}
 

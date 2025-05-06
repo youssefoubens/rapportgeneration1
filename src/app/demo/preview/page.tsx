@@ -4,35 +4,57 @@ import PDFViewer from '@/components/PDFViewer'
 import DemoNotice from '@/components/DemoNotice'
 import { FiDownload, FiEdit2, FiUserPlus, FiHome, FiFileText, FiCalendar, FiLayout } from 'react-icons/fi'
 import '../../styles/demo.css'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 
-const demoReport = {
-  title: 'Demo Lab Report: Microbial Analysis',
-  pdfUrl: '/sample-report.pdf',
-  createdAt: new Date().toISOString(),
-  pageCount: 12,
-  template: 'Academic Paper',
-  wordCount: 2450,
-  containsImages: true
+interface Report {
+  title?: string;
+  pageCount?: number;
+  template?: string;
+  pdfUrl: string;
 }
 
 export default function DemoPreviewPage() {
+  const [report, setReport] = useState<Report | null>(null)
+  const router = useRouter()
+
+  useEffect(() => {
+    // Check if user has a generated report in localStorage
+    const demoReport = localStorage.getItem('demoReport')
+    
+    if (demoReport) {
+      setReport(JSON.parse(demoReport))
+    } else {
+      // If no report exists, redirect to create one
+      router.push('/upload?demo=true')
+    }
+  }, [router])
+
+  if (!report) {
+    return (
+      <div className="demo-preview-container">
+        <div className="loading-message">Loading your report...</div>
+      </div>
+    )
+  }
+
   return (
     <div className="demo-preview-container">
       <DemoNotice />
       
       <div className="demo-preview-header">
         <div className="header-content">
-          <h1>{demoReport.title}</h1>
+          <h1>{report.title || 'Your Generated Report'}</h1>
           <p className="subtitle">This is a temporary preview - sign up to save your work permanently</p>
           
           <div className="report-metadata">
             <div className="metadata-item">
               <FiFileText className="metadata-icon" />
-              <span>{demoReport.pageCount} pages</span>
+              <span>{report.pageCount || 'N/A'} pages</span>
             </div>
             <div className="metadata-item">
               <FiLayout className="metadata-icon" />
-              <span>{demoReport.template} template</span>
+              <span>{report.template || 'Standard'} template</span>
             </div>
             <div className="metadata-item">
               <FiCalendar className="metadata-icon" />
@@ -44,14 +66,14 @@ export default function DemoPreviewPage() {
 
       <div className="preview-actions">
         <a 
-          href={demoReport.pdfUrl} 
-          download="SmartReport-Demo.pdf"
+          href={report.pdfUrl} 
+          download={`SmartReport-Demo-${Date.now()}.pdf`}
           className="action-button download-button"
         >
           <FiDownload className="button-icon" />
           Download PDF
         </a>
-        <Link href="/upload" className="action-button edit-button">
+        <Link href="/upload?demo=true" className="action-button edit-button">
           <FiEdit2 className="button-icon" />
           Create Another
         </Link>
@@ -62,7 +84,7 @@ export default function DemoPreviewPage() {
       </div>
 
       <div className="pdf-viewer-wrapper">
-        <PDFViewer url={demoReport.pdfUrl} />
+        <PDFViewer url={report.pdfUrl} />
       </div>
 
       <div className="demo-footer">
