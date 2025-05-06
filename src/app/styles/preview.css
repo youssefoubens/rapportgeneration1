@@ -1,45 +1,179 @@
-.preview-container {
+/* Base Styles */
+.demo-preview-container {
     max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    margin: 0 auto;
+        padding: 2rem 1.5rem;
+        position: relative;
+        background-color: #f9fafb;
+        min-height: 100vh;
 }
 
-.preview-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Header Styles */
+.demo-preview-header {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 0.75rem;
     margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
+.header-content {
+    max-width: 800px;
+}
+
+.demo-preview-header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.subtitle {
+    opacity: 0.9;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Metadata Styles */
+.report-metadata {
+    display: flex;
+    gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .metadata-item {
+        display: flex;
+    align-items: center;
+    gap: 0.5rem;
+        font-size: 0.9rem;
+        opacity: 0.9;
+}
+
+.metadata-icon {
+    font-size: 1rem;
+}
+
+/* Action Buttons */
 .preview-actions {
     display: flex;
     gap: 1rem;
+    margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+    
+    .action-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        text-decoration: none;
+    }
+    
+    .button-icon {
+        font-size: 1.1rem;
 }
 
 .download-button {
     background-color: #2563eb;
     color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
 }
 
-.back-button {
+.download-button:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.edit-button {
+    background-color: white;
+    color: #2563eb;
     border: 1px solid #d1d5db;
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
 }
 
+.edit-button:hover {
+    background-color: #f3f4f6;
+    transform: translateY(-1px);
+}
+
+.signup-button {
+    background-color: #10b981;
+    color: white;
+    margin-left: auto;
+}
+
+.signup-button:hover {
+    background-color: #059669;
+    transform: translateY(-1px);
+}
+
+/* PDF Viewer */
 .pdf-viewer-wrapper {
     height: 80vh;
     border: 1px solid #e5e7eb;
-    border-radius: 0.5rem;
+    border-radius: 0.75rem;
     overflow: hidden;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        background-color: white;
 }
 
-.report-metadata {
+/* Footer Styles */
+.demo-footer {
     display: flex;
-    gap: 2rem;
-    color: #6b7280;
-    font-size: 0.9rem;
+    justify-content: space-between;
+        align-items: center;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e5e7eb;
+    }
+    
+    .home-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #4b5563;
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    
+    .home-link:hover {
+        color: #2563eb;
+    }
+    
+    .home-icon {
+        font-size: 1.1rem;
+    }
+    
+    .watermark {
+        color: #9ca3af;
+        font-size: 0.875rem;
+        font-weight: 500;
+        opacity: 0.7;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .demo-preview-header {
+            padding: 1.5rem;
+        }
+    
+        .demo-preview-header h1 {
+            font-size: 1.5rem;
+        }
+    
+        .preview-actions {
+            flex-direction: column;
+        }
+    
+        .action-button {
+            width: 100%;
+            justify-content: center;
+        }
+    
+        .pdf-viewer-wrapper {
+            height: 70vh;
+        }
 }

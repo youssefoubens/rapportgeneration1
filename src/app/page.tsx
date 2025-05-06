@@ -25,7 +25,7 @@ export default async function Home() {
         ) : (
           <div className="auth-options">
          
-            <Link href="/demo/upload" className="demo-button">
+            <Link href="/demo/preview" className="demo-button">
               Try Demo
             </Link>
           </div>

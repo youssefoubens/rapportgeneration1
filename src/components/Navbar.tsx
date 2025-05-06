@@ -26,7 +26,7 @@ export default function Navbar() {
           <Link href="/templates" className="navbar-link">
             Templates
           </Link>
-          <Link href="/demo/upload" className="navbar-link">
+          <Link href="/demo/preview" className="navbar-link">
             Demo
           </Link>
           <Link href="/pricing" className="navbar-link">
